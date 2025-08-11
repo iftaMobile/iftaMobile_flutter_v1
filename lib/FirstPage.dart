@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:online_casino/KenoPage.dart';
-import 'package:online_casino/DicePage.dart';
+import 'package:online_casino/ChipSuche.dart';
 import 'package:online_casino/RockPage.dart';
 import 'package:online_casino/RoulettePage.dart';
 import 'package:online_casino/coins.dart';
@@ -87,108 +87,124 @@ class _FirstPageState extends State<FirstPage> {
           const SizedBox(width: 20),
         ],
       ),
-      drawer: SizedBox(
-        width: 205,
-        child: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              SizedBox(
-                height: 120,
-                child: DrawerHeader(
-                  decoration: const BoxDecoration(
-                    color: Color(0xFF287233),
-                  ),
-                  child: const Text(
-                    'Einstellungen',
-                    style: TextStyle(fontSize: 25, fontFamily: "VarelaRound"),
-                  ),
-                ),
-              ),
-              ListTile(
-                title: const Text('LOG IN', style: TextStyle(fontFamily: "VarelaRound")),
-                onTap: () {},
-              ),
-              ListTile(
-                title: const Text('Coins', style: TextStyle(fontFamily: "VarelaRound")),
-                onTap: () {},
-              ),
-            ],
-          ),
-        ),
-      ),
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          double screenWidth = constraints.maxWidth;
-          double imageSize = screenWidth * 0.30; // etwas kleiner für bessere Balance
+      drawer: Builder(
+        builder: (context) {
+          double drawerWidth = MediaQuery.of(context).size.width / 3;
 
-          return Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: GridView.count(
-              crossAxisCount: 2,
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              childAspectRatio: 1.2, // stabilisiert Zellhöhe
-              children: [
-                _buildGameButton(
-                  imagePath: 'assets/images/Button1_200x200px.png',
-                  label: 'Chip Suche',
-                  imageSize: imageSize,
-                  onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const DicePage()),
+          return SizedBox(
+            width: drawerWidth,
+            child: Drawer(
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: [
+                  SizedBox(
+                    height: 120,
+                    child: DrawerHeader(
+                      decoration: const BoxDecoration(
+                        color: Color(0xFF287233),
+                      ),
+                      child: const Text(
+                        'Einstellungen',
+                        style: TextStyle(fontSize: 25, fontFamily: "VarelaRound"),
+                      ),
+                    ),
                   ),
-                ),
-                _buildGameButton(
-                  imagePath: 'assets/images/Button2_200x200px.png',
-                  label: 'Tattoo Suche',
-                  imageSize: imageSize,
-                  onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const RoulettePage()),
+                  ListTile(
+                    title: const Text('LOG IN', style: TextStyle(fontFamily: "VarelaRound")),
+                    onTap: () {},
                   ),
-                ),
-                _buildGameButton(
-                  imagePath: 'assets/images/Button3_200x200px.png',
-                  label: 'ID Suche',
-                  imageSize: imageSize,
-                  onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const DicePage()),
+                  ListTile(
+                    title: const Text('Coins', style: TextStyle(fontFamily: "VarelaRound")),
+                    onTap: () {},
                   ),
-                ),
-                _buildGameButton(
-                  imagePath: 'assets/images/Button4_200x200px.png',
-                  label: 'Kunden Daten',
-                  imageSize: imageSize,
-                  onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const RoulettePage()),
-                  ),
-                ),
-                _buildGameButton(
-                  imagePath: 'assets/images/Button5_200x200px.png',
-                  label: 'Über Ifta',
-                  imageSize: imageSize,
-                  onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const DicePage()),
-                  ),
-                ),
-                _buildGameButton(
-                  imagePath: 'assets/images/Button5_200x200px.png',
-                  label: 'Registrieren',
-                  imageSize: imageSize,
-                  onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const RoulettePage()),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         },
       ),
+
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          double screenWidth = constraints.maxWidth;
+          double imageSize = screenWidth * 0.38;
+
+          return Column(
+            children: [
+              const Spacer(flex: 1), // 🧭 Platz oben
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: GridView.count(
+                  shrinkWrap: true, // 👈 wichtig, damit GridView nicht unendlich wächst
+                  physics: const NeverScrollableScrollPhysics(), // 👈 verhindert Scrollen innerhalb der Column
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 35,
+                  childAspectRatio: 1.1,
+                  children: [
+                    _buildGameButton(
+                      imagePath: 'assets/images/Button1_200x200px.png',
+                      label: 'Chip Suche',
+                      imageSize: imageSize,
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const ChipSuche()),
+                      ),
+                    ),
+                    _buildGameButton(
+                      imagePath: 'assets/images/Button2_200x200px.png',
+                      label: 'Tattoo Suche',
+                      imageSize: imageSize,
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const RoulettePage()),
+                      ),
+                    ),
+                    _buildGameButton(
+                      imagePath: 'assets/images/Button3_200x200px.png',
+                      label: 'ID Suche',
+                      imageSize: imageSize,
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const ChipSuche()),
+                      ),
+                    ),
+                    _buildGameButton(
+                      imagePath: 'assets/images/Button4_200x200px.png',
+                      label: 'Kunden Daten',
+                      imageSize: imageSize,
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const RoulettePage()),
+                      ),
+                    ),
+                    _buildGameButton(
+                      imagePath: 'assets/images/Button5_200x200px.png',
+                      label: 'Über Ifta',
+                      imageSize: imageSize,
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const ChipSuche()),
+                      ),
+                    ),
+                    _buildGameButton(
+                      imagePath: 'assets/images/Button5_200x200px.png',
+                      label: 'Registrieren',
+                      imageSize: imageSize,
+                      onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const RoulettePage()),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Spacer(flex: 3), // 🧭 Platz unten
+            ],
+          );
+        },
+      ),
+
 
     );
   }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'dice.dart';
+import 'ChipSuche.dart';
 
-class DicePage extends StatelessWidget {
-  const DicePage({super.key});
+class ChipSuchePage extends StatelessWidget {
+  const ChipSuchePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class DicePage extends StatelessWidget {
 
       body: Center(
         child:
-        DiceRoller(),
+        ChipSuche(),
 
       ),
     );

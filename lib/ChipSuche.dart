@@ -7,16 +7,16 @@ import 'storageHelper.dart';
 
 final randomizer = Random();
 
-class DiceRoller extends StatefulWidget {
+class ChipSuche extends StatefulWidget {
 
 
-  const DiceRoller({super.key});
+  const ChipSuche({super.key});
 
   @override
-  State<DiceRoller> createState() => _DiceRollerState();
+  State<ChipSuche> createState() => _ChipSucheState();
 }
 
-class _DiceRollerState extends State<DiceRoller> {
+class _ChipSucheState extends State<ChipSuche> {
   int currentDiceRoll = 0;
   int choice = 0;
   bool isButtonActiveCash = false;
