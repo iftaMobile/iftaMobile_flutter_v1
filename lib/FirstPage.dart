@@ -1,11 +1,8 @@
 // Gebaut von Marc
 
 import 'package:flutter/material.dart';
-import 'package:online_casino/KenoPage.dart';
 import 'package:online_casino/ChipSuche.dart';
-import 'package:online_casino/RockPage.dart';
-import 'package:online_casino/RoulettePage.dart';
-import 'package:online_casino/coins.dart';
+
 import 'storageHelper.dart';
 
 enum SampleItem { itemOne, itemTwo, itemThree }
@@ -157,7 +154,7 @@ class _FirstPageState extends State<FirstPage> {
                       imageSize: imageSize,
                       onPressed: () => Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const RoulettePage()),
+                        MaterialPageRoute(builder: (context) => const ChipSuche()),
                       ),
                     ),
                     _buildGameButton(
@@ -175,7 +172,7 @@ class _FirstPageState extends State<FirstPage> {
                       imageSize: imageSize,
                       onPressed: () => Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const RoulettePage()),
+                        MaterialPageRoute(builder: (context) => const ChipSuche()),
                       ),
                     ),
                     _buildGameButton(
@@ -193,7 +190,7 @@ class _FirstPageState extends State<FirstPage> {
                       imageSize: imageSize,
                       onPressed: () => Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const RoulettePage()),
+                        MaterialPageRoute(builder: (context) => const ChipSuche()),
                       ),
                     ),
                   ],
