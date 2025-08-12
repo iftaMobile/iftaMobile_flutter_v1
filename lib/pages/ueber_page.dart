@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
+//961001200037076import 'LoginPage.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
@@ -60,7 +61,7 @@ class _UeberPageState extends State<UeberPage> {
             SizedBox(height: 2),
             Text(
               'Anleitung & Info',
-              style: TextStyle(fontSize: 14, color: Colors.black54),
+              style: TextStyle(fontSize: 14, color: Colors.white),
             ),
           ],
         ),
@@ -70,22 +71,8 @@ class _UeberPageState extends State<UeberPage> {
             icon: const Icon(Icons.public),
             onPressed: _openHomepage,
           ),
-          IconButton(
-            tooltip: 'History',
-            icon: const Icon(Icons.history),
-            onPressed: () {
-              // Navigiere zur History-Seite
-              Navigator.pushNamed(context, '/history');
-            },
-          ),
-          IconButton(
-            tooltip: 'Login',
-            icon: const Icon(Icons.login),
-            onPressed: () {
-              // Navigiere zur Login-Seite
-              Navigator.pushNamed(context, '/login');
-            },
-          ),
+
+          SizedBox(width: 20,)
         ],
       ),
       body: Stack(

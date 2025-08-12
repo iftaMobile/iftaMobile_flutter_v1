@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-
+import 'first_page.dart';
+// import 'LoginPage.dart';
 // WebView-Package
 import 'package:webview_flutter/webview_flutter.dart';
 // Optional: für Android-spezifische Features
@@ -64,7 +65,20 @@ class _TierRegistrierungPageState extends State<TierRegistrierungPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Tierregistrierung')),
+      appBar: AppBar(
+        leading: IconButton(
+          iconSize: 20,
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const FirstPage()),
+          ),
+        ),
+        title: const Text('Tierregistrieren', style: TextStyle(fontSize: 27)),
+        actions: [
+
+        ],
+      ),
       body: Stack(
         children: [
           // Das neue WebView-Widget

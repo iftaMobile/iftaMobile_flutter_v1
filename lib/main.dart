@@ -1,49 +1,61 @@
-import 'dart:io';
+// lib/main.dart
 
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
-import 'package:webview_flutter_android/webview_flutter_android.dart';
-import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
-import '/UeberIfta.dart';
-import '/HistoryPage.dart';
-import '/LoginPage.dart';
+import 'package:flutter/services.dart';
+import 'package:ifta_mobile/services/session_sandbox.dart';
+import 'package:ifta_mobile/pages/first_page.dart';
+import 'package:ifta_mobile/pages/login_page.dart';
+import 'package:ifta_mobile/pages/ueber_page.dart';
+import 'package:ifta_mobile/pages/profile_page.dart';
+import 'package:ifta_mobile/pages/logout_page.dart';
 
-import 'FirstPage.dart';
-
-void main() {
-  // Stellt sicher, dass Flutter-Binding initialisiert ist,
-  // bevor Plattform-Klassen genutzt werden
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Plattform-spezifische WebView-Implementierung registrieren
-  if (Platform.isAndroid) {
-    WebViewPlatform.instance = AndroidWebViewPlatform();
-  } else if (Platform.isIOS || Platform.isMacOS) {
-    WebViewPlatform.instance = WebKitWebViewPlatform();
-  }
-  // Für Windows/macOS könntest du webview_flutter_windows bzw. -macos importieren
-  // und hier WebViewPlatform.instance = WindowsWebViewPlatform(); setzen.
+  // App auf Hochformat sperren
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    // DeviceOrientation.portraitDown, // optional: wieder aktivieren, wenn UpsideDown erlaubt sein soll
+  ]);
 
-  runApp(
-    MaterialApp(
+  // 1) Secure-Storage prüfen
+  final storedSesId = await SessionSandbox().loadSession();
+  final bool isLoggedIn = storedSesId != null && storedSesId.isNotEmpty;
+
+  // 2) App mit Flag starten
+  runApp(MyApp(isLoggedIn: isLoggedIn));
+}
+
+class MyApp extends StatelessWidget {
+  final bool isLoggedIn;
+  const MyApp({Key? key, required this.isLoggedIn}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
       title: 'IFTA Mobile',
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
         appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black,
+          backgroundColor: Color(0xFF287233),
+          foregroundColor: Colors.white,
           elevation: 0,
         ),
         primarySwatch: Colors.green,
         fontFamily: 'VarelaRound',
       ),
-      home: const FirstPage(),
-      routes: {
-        '/ueber':    (_) => const UeberPage(),
-        '/history': (_) => const HistoryPage(),
-        '/login':   (_) => const LoginPage(),
-      },
 
-    ),
-  );
+      // 3) Home je nach Login-Status
+      home: isLoggedIn ? const FirstPage() : const LoginPage(),
+
+      // optionale benannte Routen
+      routes: {
+        '/login': (_) => const LoginPage(),
+        '/first': (_) => const FirstPage(),
+        '/ueber': (_) => const UeberPage(),
+        // '/profile': (_) => const ProfilePage(),
+        '/logout': (_) => const LogoutPage(),
+      },
+    );
+  }
 }
