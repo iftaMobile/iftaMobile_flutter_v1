@@ -1,7 +1,12 @@
 // Gebaut von Marc
 
 import 'package:flutter/material.dart';
-import 'package:online_casino/ChipSuche.dart';
+import '/UeberIfta.dart';
+import 'ChipSuche.dart';
+import 'dart:math' as math;
+import 'TattooSuche.dart';
+import 'IdSuche.dart';
+import 'TierRegistrierung.dart';
 
 import 'storageHelper.dart';
 
@@ -15,6 +20,9 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
+
+  final String sesid = 'dein_vorhandener_sesid_wert';
+
   @override
   void initState() {
     super.initState();
@@ -64,19 +72,19 @@ class _FirstPageState extends State<FirstPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('IFTA Mobile', style: TextStyle(fontSize: 30)),
+        title: const Text('IFTA Mobile', style: TextStyle(fontSize: 27, fontFamily: "VarelaRound")),
         toolbarHeight: 100,
         actions: <Widget>[
           IconButton(
             icon: SizedBox(
-              height: 40,
+              height: 37,
               child: Image.asset('assets/images/Button6_200x200px.png'),
             ),
             onPressed: () {},
           ),
           IconButton(
             icon: SizedBox(
-              height: 45,
+              height: 42,
               child: Image.asset('assets/images/Button7_200x200px.png'),
             ),
             onPressed: () {},
@@ -86,7 +94,12 @@ class _FirstPageState extends State<FirstPage> {
       ),
       drawer: Builder(
         builder: (context) {
-          double drawerWidth = MediaQuery.of(context).size.width / 3;
+          final double drawerWidth = math.min(
+            MediaQuery.of(context).size.width / 2,
+            210,
+          );
+
+
 
           return SizedBox(
             width: drawerWidth,
@@ -102,7 +115,7 @@ class _FirstPageState extends State<FirstPage> {
                       ),
                       child: const Text(
                         'Einstellungen',
-                        style: TextStyle(fontSize: 25, fontFamily: "VarelaRound"),
+                        style: TextStyle(fontSize: 23, fontFamily: "VarelaRound"),
                       ),
                     ),
                   ),
@@ -129,16 +142,19 @@ class _FirstPageState extends State<FirstPage> {
           return Column(
             children: [
               const Spacer(flex: 1), // 🧭 Platz oben
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: GridView.count(
-                  shrinkWrap: true, // 👈 wichtig, damit GridView nicht unendlich wächst
-                  physics: const NeverScrollableScrollPhysics(), // 👈 verhindert Scrollen innerhalb der Column
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 35,
-                  childAspectRatio: 1.1,
-                  children: [
+              SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0), // 👈 added vertical padding
+                  child: GridView.count(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 35,
+                    childAspectRatio: 1.1,
+                    children: [
+                      // your buttons
+
                     _buildGameButton(
                       imagePath: 'assets/images/Button1_200x200px.png',
                       label: 'Chip Suche',
@@ -154,7 +170,7 @@ class _FirstPageState extends State<FirstPage> {
                       imageSize: imageSize,
                       onPressed: () => Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const ChipSuche()),
+                        MaterialPageRoute(builder: (context) => const TattooSuche()),
                       ),
                     ),
                     _buildGameButton(
@@ -163,7 +179,7 @@ class _FirstPageState extends State<FirstPage> {
                       imageSize: imageSize,
                       onPressed: () => Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const ChipSuche()),
+                        MaterialPageRoute(builder: (context) => const IdSuche()),
                       ),
                     ),
                     _buildGameButton(
@@ -181,7 +197,7 @@ class _FirstPageState extends State<FirstPage> {
                       imageSize: imageSize,
                       onPressed: () => Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const ChipSuche()),
+                        MaterialPageRoute(builder: (context) => const UeberPage()),
                       ),
                     ),
                     _buildGameButton(
@@ -190,11 +206,13 @@ class _FirstPageState extends State<FirstPage> {
                       imageSize: imageSize,
                       onPressed: () => Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const ChipSuche()),
+                        MaterialPageRoute(
+                          builder: (context) => TierRegistrierungPage(sesid: sesid)),
+                        ),
                       ),
-                    ),
                   ],
                 ),
+              ),
               ),
               const Spacer(flex: 3), // 🧭 Platz unten
             ],

@@ -1,4 +1,5 @@
-name: online_casino
+name: ifta_mobile
+
 description: "A new Flutter project."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -31,6 +32,14 @@ dependencies:
   flutter:
     sdk: flutter
   path_provider: ^2.1.2
+  webview_flutter: ^4.0.7
+  webview_flutter_android: ^4.0.7
+  webview_flutter_wkwebview: ^3.23.0
+  url_launcher: # zum Öffnen externer Links
+    ^6.1.5
+
+
+
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -67,6 +76,8 @@ flutter:
   #   - images/a_dot_ham.jpeg
   assets:
     - assets/images/
+    - assets/anleitung.html
+
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

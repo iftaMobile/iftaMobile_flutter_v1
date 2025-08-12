@@ -7,14 +7,14 @@ import 'storageHelper.dart';
 
 final randomizer = Random();
 
-class ChipSuche extends StatefulWidget {
-  const ChipSuche({super.key});
+class IdSuche extends StatefulWidget {
+  const IdSuche({super.key});
 
   @override
-  State<ChipSuche> createState() => _ChipSucheState();
+  State<IdSuche> createState() => _IdSucheState();
 }
 
-class _ChipSucheState extends State<ChipSuche> {
+class _IdSucheState extends State<IdSuche> {
   // 1) EIGENE CONTROLLER FÜR JEDES FELD
   final TextEditingController _chipNrController  = TextEditingController();
   final TextEditingController _finder1Controller = TextEditingController();
@@ -63,7 +63,7 @@ class _ChipSucheState extends State<ChipSuche> {
               TextField(
                 controller: _chipNrController,
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(labelText: 'Chip-Nr.'),
+                decoration: const InputDecoration(labelText: 'ifta ID'),
               ),
               const SizedBox(height: 10),
               TextField(
